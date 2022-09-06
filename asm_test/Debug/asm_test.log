@@ -1,7 +1,2 @@
 ﻿  asm_test.cpp
-C:\Users\Admin\source\repos\asm_test\asm_test\asm_test.cpp(19,10): warning C4101: DWN_range: неиспользованная локальная переменная
-C:\Users\Admin\source\repos\asm_test\asm_test\asm_test.cpp(20,10): warning C4101: UP_range: неиспользованная локальная переменная
-  linear_return_Dtrigger_rand.cpp
-  Создание кода...
-C:\Users\Admin\source\repos\asm_test\asm_test\linear_return_Dtrigger_rand.cpp(56): warning C4715: LRD_rand: значение возвращается не при всех путях выполнения
   asm_test.vcxproj -> C:\Users\Admin\source\repos\asm_test\Debug\asm_test.exe

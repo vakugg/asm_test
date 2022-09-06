@@ -1,3 +1,3 @@
 #pragma once
 
-int* LRD_rand(int* our_arr);
+uint32_t LRD_rand(uint32_t our_arr);

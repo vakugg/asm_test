@@ -1,84 +1,41 @@
 #include <math.h>
+#include <iostream>
 #include <windows.h>
 
 
 #define milk 5 * 1024 * 1024 / 4 -1
-int* LRD_rand(int* our_arr)
+uint32_t LRD_rand(uint32_t our_arr)
 {
-	/*if (seed > 31 || seed == 0) return(NULL); - не правильно но пусть пока лежит
-	static int seedo[5];
-	int seedo_tmp[5];
 
-	int* DWN_rng;
-	int* UP_rng;
+	//Я собирался хранить всё, что нагенерит lfsr за период в одной "переменной", а потом как-то приводить этого монстра с 6к нулями к диапазону.
+	//Даже дек реализовал средствами си, вынес в заголовок и сидел биты перекладывал в структуре - я чувствую себя идиотом.
+	
+	 static uint32_t seed_holder = our_arr;
 
-	DWN_rng = &our_arr[0];
-	UP_rng = &our_arr[milk];
+	//if (our_arr != seed_holder) //я фиг-знает; пусть будет
+	//{
+	//	exit(21);
+	//};
 
+	std::cout << std::dec<<seed_holder<< " - ";
 
-	for (int i = 0; i < 5; i++) 
-	{
-		seedo[i] = seed % 2;
-		seedo_tmp[i] = seedo[i];
-		seed /= 2;
-	}*/
+	// Algorithm "xor" from p. 4 of Marsaglia, "Xorshift RNGs" 
+	
+	seed_holder ^= seed_holder << 13;
+
+	seed_holder ^= seed_holder >> 17;
+
+	seed_holder ^= seed_holder << 5;
+	
+
+	
+
+	std::cout <<std::dec <<seed_holder << std::endl;
+
 	
 
 
-	//github stuff for single procedure 
+	
 
-	int cntr = 0;
-	int fin_cond = milk;
-	_asm
-	{
-		
-
-		DWORD adressRET;
-	LOOP:
-		MOV ax, cntr;
-		MOV bx, fin_cond;
-
-		CMP ax, bx;
-		
-		JL a1
-		JE a2
-
-	a1:
-		/*  генерим адрес тут не знаю пока как, и mov в adressRET
-		* 
-		* 
-		* //github stuff for single procedure 
-		* 
-		* 
-		* xor ecx,ecx
-			mov ebx,0FFFFFFFFh ; S
-			mov eax,095324C57h ; taps (32,31,30,28,26,22,21,18,15,12,11,8,6,4,1)
-
-			and ebx,eax
-			lahf
-			mov cl,ah ; [0-7] bits
-			sar ebx,08h
-			lahf
-			xor cl,ah ; [8-15] bits
-			sar ebx,08h
-			lahf
-			xor cl,ah ; [16-23] bits
-			sar ebx,08h
-			lahf
-			xor cl,ah ; [24-31] bits
-
-			sar cl,02h
-			and cl,01h
-		* 
-		*/
-
-		JMP adressRET;
-		JMP LOOP
-
-
-	a2:
-		RET;
-	}
-
-
+	return(seed_holder);// вот как они разные каждый раз, а temp - нет
 };
